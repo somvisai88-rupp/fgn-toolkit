@@ -1,0 +1,80 @@
+{
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "Data/InstalledAppRules.csv",
+      "sha256": "BB7320E31552ED5A2F031BDB86E7C5D4371F5E3BB2AEE55262A16BC65BAF4328",
+      "mode": "data"
+    },
+    {
+      "path": "Data/MicrosoftApps.csv",
+      "sha256": "21DC3334BB25193E125EB09F9FE93F8A777A8A37A5816DF83FA89D7F08102D85",
+      "mode": "data"
+    },
+    {
+      "path": "Data/PromoKeywords.txt",
+      "sha256": "028FA9B43FCC73EFF808D109121FB2088A73E6ABE905CE947DD6DCF04CB671A0",
+      "mode": "data"
+    },
+    {
+      "path": "Data/consumer-app-list.json",
+      "sha256": "82E324075AC60BFC130C34E5FA08C2C11FC4890B9B4B54BF56EFFC5D8A435E08",
+      "mode": "data"
+    },
+    {
+      "path": "FGN-Menu.ps1",
+      "sha256": "4D1E81EB9A1AA9253B5AB53E65645A45AD711699CC87DDC2372325AECCD95F60",
+      "mode": "pinned"
+    },
+    {
+      "path": "Lib/FGN-Common.ps1",
+      "sha256": "CFE095C06C5C2BE95EBB814B888486DDFC51555424F7AF3C49C72C48B37AEB80",
+      "mode": "pinned"
+    },
+    {
+      "path": "README.txt",
+      "sha256": "EA2F64965D5CDCFC0458F17FB560B5EB857E0F3CF1483996CDD37BBBFB83BEB2",
+      "mode": "pinned"
+    },
+    {
+      "path": "Remove/Remove-ConsumerApps.ps1",
+      "sha256": "3CF0A588DC57A92EBFCCF9D063DDBF9B63E5569979DF299F64302364EB6952CD",
+      "mode": "pinned"
+    },
+    {
+      "path": "Remove/Remove-InstalledApps.ps1",
+      "sha256": "DF6A9D9CD3619A7747C96AC640C6389ADDC2A8A96E60F889C47BCD56966CB556",
+      "mode": "pinned"
+    },
+    {
+      "path": "Remove/Remove-MicrosoftApps.ps1",
+      "sha256": "B96E910970C7D67FD50CB7F571F6FA93C42A05FC42447DDED747DDAB518A8E9B",
+      "mode": "pinned"
+    },
+    {
+      "path": "Run-FGN-Menu.cmd",
+      "sha256": "BC169C1D5DCC9AC56E4B06FCF6E335609FD43A0AD38EC0B504DBC6A8DCC64331",
+      "mode": "pinned"
+    },
+    {
+      "path": "Scan/Scan-ConsumerApps.ps1",
+      "sha256": "552BEAABC7773301544D9AFB3BC88D3FC254DF373DD9A6429B18FF4225834517",
+      "mode": "pinned"
+    },
+    {
+      "path": "Scan/Scan-InstalledApps.ps1",
+      "sha256": "F8B4C7B898A0AFB0F7ABEA33C37E998DB9FB8BE0BAA9DD3081B580F5D2415D0D",
+      "mode": "pinned"
+    },
+    {
+      "path": "Scan/Scan-MicrosoftApps.ps1",
+      "sha256": "4EBACE0E60CDB73102769F03D296F1C19429A1097DE320F089C112685D6F0640",
+      "mode": "pinned"
+    },
+    {
+      "path": "Tools/FGN-Win11-Debloat-Auto.ps1",
+      "sha256": "A9E179CE63E76D2DC42258FB5C2BDF8A4DF181742D297012250493F27FFBEEA4",
+      "mode": "pinned"
+    }
+  ]
+}
