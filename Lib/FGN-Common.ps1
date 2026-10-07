@@ -648,7 +648,10 @@ function Find-FGNApp {
         $ProvisionedList
     )
     if ($null -eq $ProvisionedList) { $ProvisionedList = Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue }
-    $Installed = @(Get-AppxPackage -Name $Name -AllUsers -ErrorAction SilentlyContinue)
+    $Installed = @(Get-AppxPackage -Name $Name -AllUsers -ErrorAction SilentlyContinue | Where-Object {
+        $States = @($_.PackageUserInformation)
+        ($States.Count -eq 0) -or (@($States | Where-Object { "$($_.InstallState)" -eq 'Installed' }).Count -gt 0)
+    })
     $Provisioned = @($ProvisionedList | Where-Object { $_.DisplayName -like $Name })
     [pscustomobject]@{
         Name        = $Name
@@ -707,6 +710,17 @@ function Remove-FGNStoreApp {
         }
     }
 
+    # Still installed for some user? Remove it for each user account separately
+    $After = Find-FGNApp -Name $Name
+    foreach ($Pkg in $After.Installed) {
+        foreach ($Info in @($Pkg.PackageUserInformation | Where-Object { "$($_.InstallState)" -eq 'Installed' })) {
+            $Sid = "$($Info.UserSecurityId.Sid)"
+            if (-not $Sid) { continue }
+            try { Remove-AppxPackage -Package $Pkg.PackageFullName -User $Sid -ErrorAction Stop }
+            catch { $Problems += "user ${Sid}: $($_.Exception.Message)" }
+        }
+    }
+
     # Verify (Windows can take a few seconds to finish)
     $After = Find-FGNApp -Name $Name
     $Wait = 0
@@ -717,6 +731,11 @@ function Remove-FGNStoreApp {
     }
     if ($After.Found) {
         $Why = "still present: installed $($After.Installed.Count), in the Windows image $($After.Provisioned.Count)"
+        $Seen = @()
+        foreach ($Pkg in $After.Installed) {
+            foreach ($Info in @($Pkg.PackageUserInformation)) { $Seen += "$($Info.UserSecurityId.Sid)=$($Info.InstallState)" }
+        }
+        if ($Seen.Count -gt 0) { $Why += ' [' + (($Seen | Select-Object -Unique) -join ', ') + ']' }
         $Unique = @($Problems | Select-Object -Unique | Select-Object -First 3)
         if ($Unique.Count -gt 0) { $Why += ' | ' + ($Unique -join ' | ') }
         else { $Why += ' | Windows reported no error (restart the PC and scan again)' }
