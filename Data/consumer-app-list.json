@@ -1,0 +1,480 @@
+{
+  "_help": "Every consumer app FGN has decided about. action = remove, keep or ask-client. method = how it is removed: appx (a Store app, use package), uninstall (an installed program, use program) or command (your own command, use program and command). package and program may use * as a wildcard; exclude lists names to leave out. The first matching entry wins. Apps that are NOT listed here are shown as NEW and cannot be removed until you add them. Keep the commas and quotes exactly as in the entries below. See _examples for the other methods.",
+  "_examples": [
+    {
+      "name": "Example: installed program, its own uninstaller",
+      "action": "remove",
+      "method": "uninstall",
+      "program": "Example Trial Software*",
+      "silentArgs": "/S",
+      "reason": "silentArgs is only added when the uninstaller has no quiet mode of its own. Leave it out if not needed.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Example: your own command",
+      "action": "remove",
+      "method": "command",
+      "program": "Example App*",
+      "command": "winget uninstall --id Example.App -e --silent --accept-source-agreements",
+      "reason": "The command is run as written. The app counts as removed when its program entry is gone. winget is not there if the Store was removed.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Example: Store app",
+      "action": "remove",
+      "method": "appx",
+      "package": "Example.StoreApp*",
+      "reason": "The Store app is removed for every user and from the Windows image.",
+      "risk": "low",
+      "added": "2026-10-07"
+    }
+  ],
+  "apps": [
+    {
+      "name": "Clipchamp video editor",
+      "action": "remove",
+      "method": "appx",
+      "package": "Clipchamp.Clipchamp",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Copilot (app and older provider package)",
+      "action": "remove",
+      "method": "appx",
+      "package": "*Copilot*",
+      "reason": "Copilot app and the older Copilot provider package.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Copilot (regular program)",
+      "action": "remove",
+      "method": "uninstall",
+      "program": "*Copilot*",
+      "exclude": [
+        "GitHub*"
+      ],
+      "reason": "Copilot installed as a regular program (not a Store app). It is removed with its own uninstaller.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Dev Home",
+      "action": "remove",
+      "method": "appx",
+      "package": "*DevHome*",
+      "reason": "Developer tool; the package name differs between Windows builds.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "New Outlook",
+      "action": "ask-client",
+      "method": "appx",
+      "package": "Microsoft.OutlookForWindows",
+      "reason": "New Outlook. Keep it if the client uses Outlook with Microsoft 365.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Cross Device Experience Host",
+      "action": "remove",
+      "method": "appx",
+      "package": "MicrosoftWindows.CrossDevice",
+      "reason": "Cross Device Experience Host (phone and PC linking).",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Microsoft News",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.BingNews",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "MSN Weather",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.BingWeather",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Bing Search",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.BingSearch",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Xbox app",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.GamingApp",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Get Help",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.GetHelp",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Tips (Get Started)",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.Getstarted",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Microsoft 365 hub (Office)",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.MicrosoftOfficeHub",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Microsoft Solitaire Collection",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.MicrosoftSolitaireCollection",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Mixed Reality Portal",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.MixedReality.Portal",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Microsoft People",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.People",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Power Automate",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.PowerAutomateDesktop",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Microsoft To Do",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.Todos",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Clock and Alarms",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.WindowsAlarms",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Feedback Hub",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.WindowsFeedbackHub",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Maps",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.WindowsMaps",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Sound Recorder",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.WindowsSoundRecorder",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Xbox TCUI",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.Xbox.TCUI",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Xbox Console Companion",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.XboxApp",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Xbox Game Overlay",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.XboxGameOverlay",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Xbox Game Bar",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.XboxGamingOverlay",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Xbox Identity Provider",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.XboxIdentityProvider",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Xbox Speech To Text Overlay",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.XboxSpeechToTextOverlay",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Phone Link",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.YourPhone",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Media Player (new Windows Media Player)",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.ZuneMusic",
+      "reason": "The new Windows Media Player. FGN policy removes it; people who play music or video files with it will notice.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Movies & TV",
+      "action": "remove",
+      "method": "appx",
+      "package": "Microsoft.ZuneVideo",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Microsoft Family",
+      "action": "remove",
+      "method": "appx",
+      "package": "MicrosoftCorporationII.MicrosoftFamily",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Quick Assist",
+      "action": "ask-client",
+      "method": "appx",
+      "package": "MicrosoftCorporationII.QuickAssist",
+      "reason": "Remote-support tool. Keep it if the team uses it for support.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Microsoft Teams (24H2 name)",
+      "action": "ask-client",
+      "method": "appx",
+      "package": "MSTeams",
+      "reason": "Teams. Keep it if the client uses Teams for work.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Microsoft Teams (older name)",
+      "action": "ask-client",
+      "method": "appx",
+      "package": "MicrosoftTeams",
+      "reason": "Older Teams package. Keep it if the client uses Teams for work.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Spotify",
+      "action": "remove",
+      "method": "appx",
+      "package": "SpotifyAB.SpotifyMusic",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Disney+",
+      "action": "remove",
+      "method": "appx",
+      "package": "Disney.37853FC22B2CE",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Facebook",
+      "action": "remove",
+      "method": "appx",
+      "package": "*.Facebook*",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "TikTok",
+      "action": "remove",
+      "method": "appx",
+      "package": "*.TikTok*",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Instagram",
+      "action": "remove",
+      "method": "appx",
+      "package": "*.Instagram*",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Twitter / X",
+      "action": "remove",
+      "method": "appx",
+      "package": "*.Twitter*",
+      "reason": "Consumer app, not needed on a business PC.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Realtek Audio Console",
+      "action": "keep",
+      "method": "appx",
+      "package": "RealtekSemiconductorCorp.RealtekAudioControl",
+      "reason": "Realtek audio settings. Needed to change sound options on many PCs.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "NVIDIA Control Panel",
+      "action": "keep",
+      "method": "appx",
+      "package": "NVIDIACorp.NVIDIAControlPanel",
+      "reason": "Graphics driver settings.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Intel Graphics Command Center",
+      "action": "keep",
+      "method": "appx",
+      "package": "AppUp.IntelGraphicsExperience",
+      "reason": "Intel graphics driver settings.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Intel Graphics Control Panel",
+      "action": "keep",
+      "method": "appx",
+      "package": "AppUp.IntelGraphicsControlPanel",
+      "reason": "Intel graphics driver settings.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Dolby Access",
+      "action": "keep",
+      "method": "appx",
+      "package": "DolbyLaboratories.DolbyAccess",
+      "reason": "Audio enhancement settings on many laptops.",
+      "risk": "low",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Lenovo Vantage",
+      "action": "keep",
+      "method": "appx",
+      "package": "E046963F.LenovoCompanion",
+      "reason": "Lenovo drivers, updates and hardware settings.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "Lenovo Vantage (enterprise)",
+      "action": "keep",
+      "method": "appx",
+      "package": "E046963F.LenovoSettingsforEnterprise",
+      "reason": "Lenovo drivers, updates and hardware settings.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    },
+    {
+      "name": "McAfee Security",
+      "action": "ask-client",
+      "method": "appx",
+      "package": "5A894077.McAfeeSecurity",
+      "reason": "Preinstalled McAfee trial. Remove it if the client has not bought it and another antivirus is installed.",
+      "risk": "medium",
+      "added": "2026-10-07"
+    }
+  ]
+}

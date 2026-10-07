@@ -1,0 +1,16 @@
+Pattern,Verdict,MinVersion,Why
+Khmer|NiDA,KEEP,,"Khmer typing, fonts or dictionary. Do not remove."
+WinRAR,UPDATE,7.13,"Versions before 7.13 have known exploited vulnerabilities (CVE-2023-38831, CVE-2025-8088). Update to the current version."
+^7-Zip,UPDATE,24.09,Versions before 24.09 have a vulnerability that bypasses Windows download warnings (CVE-2025-0411). Update.
+Adobe (Acrobat|Reader),UPDATE,24.0,Older Acrobat and Reader releases are missing years of security fixes. Update.
+Adobe Genuine,KEEP,,Adobe licence checker. Leave it while Adobe software is installed.
+AnyDesk|RustDesk|TeamViewer|UltraViewer|Splashtop|LogMeIn|ScreenConnect|ConnectWise|Chrome Remote Desktop|VNC,REVIEW,,"Remote-access tool. Keep one standard, controlled tool and remove the rest."
+McAfee|Norton|WildTangent,REVIEW,,"Usually a trial or preinstalled program. Safe to remove if the client has not bought it, but keep real antivirus until a replacement is in place."
+Avast|AVG |Kaspersky|Bitdefender|ESET,REVIEW,,Antivirus. Make sure only one is installed and that it is licensed.
+Telegram|WhatsApp|Viber|Zalo|WeChat,ASK CLIENT,,Messaging app. Common for business in Cambodia; remove it only if the client's policy says so.
+NVIDIA (GeForce Experience|FrameView),OPTIONAL,,"Gaming, recording and overlay tool. Remove it if the PC is not used for gaming or video capture. The graphics driver stays."
+NVIDIA .*(Driver|PhysX)|Realtek|Intel\(R\)|AMD (Software|Chipset)|Driver,KEEP,,Driver or hardware support software.
+^Microsoft (Office|365),KEEP,,Business software.
+^Microsoft (Visual C\+\+|\.NET|Windows Desktop Runtime|Windows Application Compatibility),KEEP,,Windows component or runtime.
+UniFi|MikroTik|Winbox|Advanced IP Scanner|PuTTY|WinSCP|Wireshark,KEEP,,IT or network tool.
+Google Chrome|Mozilla Firefox|Brave,KEEP,,Web browser.

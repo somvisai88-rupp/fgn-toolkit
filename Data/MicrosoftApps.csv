@@ -1,0 +1,41 @@
+Kind,Pattern,Verdict,Why
+Store,Microsoft.WindowsCalculator,KEEP,Everyday tool.
+Store,Microsoft.WindowsNotepad,KEEP,Everyday tool.
+Store,Microsoft.Windows.Photos,KEEP,Photo viewer.
+Store,Microsoft.Paint,KEEP,Everyday tool.
+Store,Microsoft.ScreenSketch,KEEP,Snipping Tool. Staff use it for screenshots.
+Store,Microsoft.WindowsTerminal,KEEP,Command-line tool.
+Store,Microsoft.PowerShell,KEEP,PowerShell 7 from the Store.
+Store,Microsoft.MicrosoftStickyNotes,KEEP,Useful. Remove only if the client does not want notes synced to a Microsoft account.
+Store,Microsoft.WindowsCamera,KEEP,Harmless. Needed for webcams and video calls.
+Store,Microsoft.DesktopAppInstaller,KEEP,App Installer (winget).
+Store,Microsoft.Winget.Source,KEEP,Package source for winget.
+Store,Microsoft.SecHealthUI,KEEP,Windows Security app.
+Store,Microsoft.ApplicationCompatibilityEnhancements,KEEP,Windows compatibility component.
+Store,Microsoft.StartExperiencesApp,KEEP,Part of the Start menu.
+Store,Microsoft.WidgetsPlatformRuntime,KEEP,Widgets runtime. Widgets are switched off by policy; removing this gains almost nothing and Windows Update may restore it.
+Store,MicrosoftWindows.Client.WebExperience,OPTIONAL,Widgets. Switched off by policy; removing the package is optional.
+Store,Microsoft.AV1VideoExtension,KEEP,Media codec. Removing it breaks playback of some photos and videos.
+Store,Microsoft.AVCEncoderVideoExtension,KEEP,Media codec. Removing it breaks playback of some photos and videos.
+Store,Microsoft.HEIFImageExtension,KEEP,Media codec. Removing it breaks playback of some photos and videos. HEIF is the iPhone photo format.
+Store,Microsoft.HEVCVideoExtension,KEEP,Media codec. Removing it breaks playback of some photos and videos.
+Store,Microsoft.MPEG2VideoExtension,KEEP,Media codec. Removing it breaks playback of some photos and videos.
+Store,Microsoft.RawImageExtension,KEEP,Media codec. Removing it breaks playback of some photos and videos.
+Store,Microsoft.VP9VideoExtensions,KEEP,Media codec. Removing it breaks playback of some photos and videos.
+Store,Microsoft.WebMediaExtensions,KEEP,Media codec. Removing it breaks playback of some photos and videos.
+Store,Microsoft.WebpImageExtension,KEEP,Media codec. Removing it breaks playback of some photos and videos.
+Store,Microsoft.LanguageExperiencePack*,KEEP,Display-language pack (for example Khmer). Removing it removes that language.
+Store,MicrosoftCorporationII.WinAppRuntime*,KEEP,Runtime that other apps depend on.
+Store,Microsoft.Edge.GameAssist,REMOVE,"Edge's in-game browser overlay. Safe to remove, especially once Edge is gone. Windows Update may bring it back."
+Store,Microsoft.549981C3F5F10,REMOVE,Cortana (discontinued).
+Store,Microsoft.Whiteboard,OPTIONAL,Whiteboard app. Remove it if nobody uses it.
+Store,Microsoft.MicrosoftJournal,OPTIONAL,Journal app. Remove it if nobody uses it.
+Store,Microsoft.Office.OneNote,OPTIONAL,OneNote (Store version). Keep it if staff use OneNote.
+Program,Microsoft Office*,KEEP,Business software.
+Program,Microsoft 365*,KEEP,Business software.
+Program,Microsoft Visual C++*,KEEP,Runtime that other programs depend on.
+Program,Microsoft .NET*,KEEP,Runtime that other programs depend on.
+Program,Microsoft Windows Desktop Runtime*,KEEP,Runtime that other programs depend on.
+Program,Microsoft ASP.NET*,KEEP,Runtime that other programs depend on.
+Program,Microsoft Update Health Tools,KEEP,Helps Windows Update.
+Program,Microsoft Teams*,ASK CLIENT,Teams. Remove it only if the client does not use Teams for work.

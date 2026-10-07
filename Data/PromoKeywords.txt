@@ -1,0 +1,43 @@
+# Words that suggest trial or consumer software. One per line; lines starting with # are comments.
+# Used only to HIGHLIGHT apps for a person to review - nothing is ever removed just because it matches.
+McAfee
+Norton
+WildTangent
+Candy
+ExpressVPN
+Booking
+Amazon
+Netflix
+TikTok
+Instagram
+Facebook
+Twitter
+Spotify
+Disney
+LinkedIn
+WhatsApp
+Telegram
+Messenger
+Pinterest
+Hulu
+Roblox
+Solitaire
+Duolingo
+Peacock
+ESPN
+PicsArt
+Dropbox
+Evernote
+Skype
+Gardenscapes
+Asphalt
+Hidden City
+March of Empires
+Royal Revolt
+Bubble
+Farm
+CCleaner
+WinZip
+uTorrent
+BitTorrent
+Trial
