@@ -659,7 +659,8 @@ function Find-FGNApp {
 }
 
 function Remove-FGNStoreApp {
-    # Scan first, remove the installed copies, then the provisioned copy, then verify
+    # Scan first, close the app, remove the installed copies, then the provisioned copy, then verify.
+    # Each step has a second method, and the result names exactly what is left and why.
     param([string]$Name, $ProvisionedList, [switch]$DryRun)
     $Scan = Find-FGNApp -Name $Name -ProvisionedList $ProvisionedList
     if (-not $Scan.Found) {
@@ -672,18 +673,53 @@ function Remove-FGNStoreApp {
         return
     }
     $Problems = @()
+
+    # An app that is open cannot be removed: close it first
     foreach ($Pkg in $Scan.Installed) {
-        try { Remove-AppxPackage -Package $Pkg.PackageFullName -AllUsers -ErrorAction Stop }
-        catch { $Problems += $_.Exception.Message }
+        $Dir = "$($Pkg.InstallLocation)"
+        if (-not $Dir) { continue }
+        foreach ($Proc in @(Get-Process -ErrorAction SilentlyContinue | Where-Object { $_.Path -and $_.Path.StartsWith($Dir, [StringComparison]::OrdinalIgnoreCase) })) {
+            try { Stop-Process -Id $Proc.Id -Force -ErrorAction Stop } catch { }
+        }
     }
+
+    # Installed copies: for every user first, then for the current user only
+    foreach ($Pkg in $Scan.Installed) {
+        try {
+            Remove-AppxPackage -Package $Pkg.PackageFullName -AllUsers -ErrorAction Stop
+        } catch {
+            $Problems += "all users: $($_.Exception.Message)"
+            try { Remove-AppxPackage -Package $Pkg.PackageFullName -ErrorAction Stop }
+            catch { $Problems += "current user: $($_.Exception.Message)" }
+        }
+    }
+
+    # Provisioned copy: PowerShell first, then DISM
     foreach ($Prov in $Scan.Provisioned) {
-        try { Remove-AppxProvisionedPackage -Online -PackageName $Prov.PackageName -ErrorAction Stop | Out-Null }
-        catch { $Problems += $_.Exception.Message }
+        try {
+            Remove-AppxProvisionedPackage -Online -PackageName $Prov.PackageName -ErrorAction Stop | Out-Null
+        } catch {
+            $Problems += "image: $($_.Exception.Message)"
+            try {
+                $Out = & dism.exe /Online /Remove-ProvisionedAppxPackage /PackageName:$($Prov.PackageName) /NoRestart 2>&1
+                if ($LASTEXITCODE -ne 0) { $Problems += "dism exit code $LASTEXITCODE" }
+            } catch { $Problems += "dism: $($_.Exception.Message)" }
+        }
     }
+
+    # Verify (Windows can take a few seconds to finish)
     $After = Find-FGNApp -Name $Name
+    $Wait = 0
+    while ($After.Found -and $Wait -lt 3) {
+        Start-Sleep -Seconds 2
+        $Wait++
+        $After = Find-FGNApp -Name $Name
+    }
     if ($After.Found) {
-        $Why = 'still present afterwards (may be protected on this build)'
-        if ($Problems.Count -gt 0) { $Why += ': ' + $Problems[0] }
+        $Why = "still present: installed $($After.Installed.Count), in the Windows image $($After.Provisioned.Count)"
+        $Unique = @($Problems | Select-Object -Unique | Select-Object -First 3)
+        if ($Unique.Count -gt 0) { $Why += ' | ' + ($Unique -join ' | ') }
+        else { $Why += ' | Windows reported no error (restart the PC and scan again)' }
         Add-FGNRemoveResult -Item $Name -Result 'FAILED' -Detail $Why
     } else {
         Add-FGNRemoveResult -Item $Name -Result 'REMOVED'
