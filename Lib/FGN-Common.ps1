@@ -330,7 +330,13 @@ function Get-FGNStorePackageList {
     param($ProvisionedList)
     if ($null -eq $ProvisionedList) { $ProvisionedList = Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue }
     $ProvisionedList = @($ProvisionedList)
-    $Installed = @(Get-AppxPackage -AllUsers -ErrorAction SilentlyContinue | Where-Object { -not $_.IsFramework -and -not $_.IsResourcePackage })
+    # A package that no user account has installed (for example only "Paused" for the system account) is a
+    # left-over registration, not an installed app. Find-FGNApp uses the same rule when removing.
+    $Installed = @(Get-AppxPackage -AllUsers -ErrorAction SilentlyContinue | Where-Object {
+        if ($_.IsFramework -or $_.IsResourcePackage) { return $false }
+        $States = @($_.PackageUserInformation)
+        ($States.Count -eq 0) -or (@($States | Where-Object { "$($_.InstallState)" -eq 'Installed' }).Count -gt 0)
+    })
     $Names = @(@($Installed | ForEach-Object { $_.Name }) + @($ProvisionedList | ForEach-Object { $_.DisplayName }) |
         Where-Object { $_ -and $_ -notmatch $script:FGNFrameworkPattern } | Sort-Object -Unique)
     foreach ($Name in $Names) {
